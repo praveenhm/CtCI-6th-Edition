@@ -17,7 +17,7 @@ public class QuestionA {
 	}
 	
 	public static void main(String[] args) {
-		String str = "aa";
+		String str = "aaaabbc";
 		System.out.println(str);
 		System.out.println(compressBad(str));
 	}
