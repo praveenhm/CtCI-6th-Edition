@@ -37,16 +37,16 @@ public class QuestionA {
 	public static boolean oneEditAway(String first, String second) {
 		if (first.length() == second.length()) {
 			return oneEditReplace(first, second);
-		} else if (first.length() + 1 == second.length()) {
-			return oneEditInsert(first, second);
-		} else if (first.length() - 1 == second.length()) {
-			return oneEditInsert(second, first);
-		} 
+		} else if (first.length() + 1 == second.length()) { // first: "pal"  second: "pale"
+			return oneEditInsert(first, second);           // first: "pal"  second: "pale"
+		} else if (first.length() - 1 == second.length()) {// first: "pale"  second: "pal"
+			return oneEditInsert(second, first);           // second: "pal"   first: "pale"
+ 		}
 		return false;
 	}
 	
 	public static void main(String[] args) {
-		String a = "pse";
+		String a = "pal";
 		String b = "pale";
 		boolean isOneEdit = oneEditAway(a, b);
 		System.out.println(a + ", " + b + ": " + isOneEdit);
