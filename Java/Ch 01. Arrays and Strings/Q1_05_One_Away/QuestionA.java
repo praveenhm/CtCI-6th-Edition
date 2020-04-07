@@ -17,7 +17,7 @@ public class QuestionA {
 	}
 	
 	/* Check if you can insert a character into s1 to make s2. */
-	public static boolean oneEditInsert(String s1, String s2) {
+	public static boolean oneEditInsert(String s1, String s2) {// s1: "pal" s2: "pale"
 		int index1 = 0;
 		int index2 = 0;
 		while (index2 < s2.length() && index1 < s1.length()) {
