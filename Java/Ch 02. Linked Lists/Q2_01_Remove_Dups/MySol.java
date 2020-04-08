@@ -8,16 +8,18 @@ public class MySol {
         System.out.println("linked list");
 
         LinkedListImpl listImpl = new LinkedListImpl();
-        listImpl.addNode(10);
-        listImpl.addNode(20);
-        listImpl.addNode(30);
-        listImpl.addNode(40);
-        listImpl.printLinkedList();
-        listImpl.addNode(50);
-        listImpl.printLinkedList();
-        listImpl.removeNode();
-        listImpl.printLinkedList();
-        listImpl.removeNodeAtCertainIndex(3);
+        listImpl.addNode2(10);
+        listImpl.addNode2(20);
+        listImpl.addNode2(30);
+        listImpl.deleteNode(30);
+
+//        listImpl.addNode(40);
+//        listImpl.printLinkedList();
+//        listImpl.addNode(50);
+//        listImpl.printLinkedList();
+//        listImpl.removeNode();
+//        listImpl.printLinkedList();
+//        listImpl.removeNodeAtCertainIndex(3);
         listImpl.printLinkedList();
     }
 }
@@ -27,7 +29,7 @@ class LinkedListImpl {
 
     static class Node {
         int data;
-        Node next;
+        Node next = null;
 
         public Node(int data) {
             this.data = data;
@@ -53,13 +55,17 @@ class LinkedListImpl {
      * Just using head, no tail
      * append to tail
      */
-    public void addNode2(int data) {
-        Node tail = new Node(data);
-        Node tmp = head;
-        while (tmp.next != null) {
-            tmp = tmp.next;
+    public void addNode2(int d) {
+        Node end = new Node(d);
+        if (head == null) {
+            head = end;
+        } else {
+            Node n = head;
+            while (n.next != null) {
+                n = n.next;
+            }
+            n.next = end;
         }
-        tmp.next = tail;
     }
 
     /*
@@ -85,6 +91,21 @@ class LinkedListImpl {
         }
         tmp.next = null;
         tail = tmp;
+    }
+
+    public void deleteNode(int d) {
+        Node n = head;
+        if (n.data == d) {
+            head = head.next; // carefull head.next = head is totally wrong
+        } else {
+            while (n.next != null) {
+                if (n.next.data == d) {
+                    n.next = n.next.next;
+                } else {
+                    n = n.next;
+                }
+            }
+        }
     }
 
     /*
