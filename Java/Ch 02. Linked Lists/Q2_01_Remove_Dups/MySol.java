@@ -13,7 +13,7 @@ public class MySol {
         listImpl.addNode2(30);
         listImpl.deleteNode(30);
 
-//        listImpl.addNode(40);
+        listImpl.addNode(40);
 //        listImpl.printLinkedList();
 //        listImpl.addNode(50);
 //        listImpl.printLinkedList();
@@ -31,8 +31,8 @@ class LinkedListImpl {
         int data;
         Node next = null;
 
-        public Node(int data) {
-            this.data = data;
+        public Node(int d) {
+            this.data = d;
         }
     }
 
@@ -40,14 +40,14 @@ class LinkedListImpl {
     /*
      * Adds node at the end of the current list
      */
-    public void addNode(int data) {
+    public void addNode(int d) {
+        Node n = new Node(d);
         if (head == null) {
-            Node tmp = new Node(data);
-            head = tmp;
-            tail = tmp;
+            head = n;
+            tail = n;
         } else {
-            tail.next = new Node(data);
-            tail = tail.next;
+            n.next = head;
+            head = n;
         }
     }
 
@@ -71,26 +71,26 @@ class LinkedListImpl {
     /*
      * Adds node at the certain index.
      */
-    public void addNodeAtCertainIndex(int data, int index) {
-        Node tmp = head;
+    public void addNodeAtCertainIndex(int d, int index) {
+        Node n = head;
         int count = 0;
-        while (tmp != null && ++count != index)
-            tmp = tmp.next;
-        Node node = new Node(data);
-        node.next = tmp.next;
-        tmp.next = node;
+        while (n != null && ++count != index)
+            n = n.next;
+        Node node = new Node(d);
+        node.next = n.next;
+        n.next = node;
     }
 
     /*
      * Removes the last node in the given list and updates tail node
      */
     public void removeNode() {
-        Node tmp = head;
-        while (tmp.next != null && tmp.next.next != null) {
-            tmp = tmp.next;
+        Node n = head;
+        while (n.next != null && n.next.next != null) {
+            n = n.next;
         }
-        tmp.next = null;
-        tail = tmp;
+        n.next = null;
+        tail = n;
     }
 
     public void deleteNode(int d) {
@@ -122,22 +122,22 @@ class LinkedListImpl {
      *
      */
     public void removeNodeAtCertainIndex(int index) {
-        Node tmp = head;
+        Node n = head;
         int count = 0;
-        while (tmp != null && ++count != index)
-            tmp = tmp.next;
-        tmp.data = tmp.next.data;
-        tmp.next = tmp.next.next;
+        while (n != null && ++count != index)
+            n = n.next;
+        n.data = n.next.data;
+        n.next = n.next.next;
     }
 
     /*
-     * Checks if a node with the given dataue exist in the list, returns true or false.
+     * Checks if a node with the given due exist in the list, returns true or false.
      * Alternatively you can return the index too.
      */
     public boolean search(int target) {
-        Node tmp = head;
-        while (tmp != null) {
-            if (tmp.data == target)
+        Node n = head;
+        while (n != null) {
+            if (n.data == target)
                 return true;
         }
         return false;
@@ -145,14 +145,14 @@ class LinkedListImpl {
     }
 
     /*
-     * Checks if a node with the given dataue exist in the list, returns the index of the given dataue in the list.
+     * Checks if a node with the given due exist in the list, returns the index of the given due in the list.
      */
     public int searchAndReturnIndex(int target) {
-        Node tmp = head;
+        Node n = head;
         int count = 0;
-        while (tmp != null) {
+        while (n != null) {
             count++;
-            if (tmp.data == target) return count;
+            if (n.data == target) return count;
         }
         return -1;
     }
@@ -163,10 +163,10 @@ class LinkedListImpl {
 
     public void printLinkedList() {
         System.out.println();
-        Node tmp = head;
-        while (tmp != null) {
-            System.out.print(" " + tmp.data);
-            tmp = tmp.next;
+        Node n = head;
+        while (n != null) {
+            System.out.print(" " + n.data);
+            n = n.next;
         }
     }
 
