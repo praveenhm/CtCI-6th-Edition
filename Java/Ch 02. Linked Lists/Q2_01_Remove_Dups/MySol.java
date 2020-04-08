@@ -11,20 +11,32 @@ public class MySol {
         listImpl.addNode2(10);
         listImpl.addNode2(20);
         listImpl.addNode2(30);
-        listImpl.deleteNode(30);
+        listImpl.addNode2(20);
+        listImpl.addNode2(30);
+        listImpl.addNode2(40);
 
-        listImpl.addNode(40);
-//        listImpl.printLinkedList();
+        listImpl.removeDups();
+        //listImpl.deleteNode(20);
+//        listImpl.deleteNode(20);
+
+
+        //       listImpl.addNode(40);
+        //      listImpl.printLinkedList();
 //        listImpl.addNode(50);
 //        listImpl.printLinkedList();
-//        listImpl.removeNode();
+        //      listImpl.removeNode();
 //        listImpl.printLinkedList();
 //        listImpl.removeNodeAtCertainIndex(3);
         listImpl.printLinkedList();
     }
 }
 
+/*
+ *   Linked list
+ *
+ */
 class LinkedListImpl {
+
     Node head = null, tail = null;
 
     static class Node {
@@ -37,8 +49,57 @@ class LinkedListImpl {
     }
 
 
+    /* remove duplicates
+       page 94, problem 2.1
+       use two pointers p1 and p2
+       keep one pointe and iterate rest
+     */
+    public void removeDups() {
+        Node p1 = null, p2 = null;
+        p1 = head;
+        while (p1 != null && p1.next != null) {
+            p2 = p1;
+            while (p2.next != null) {
+                if (p1.data == p2.next.data) {
+                    p2.next = p2.next.next;   // skip the duplicate/remove
+                } else {
+                    p2 = p2.next;
+                }
+            }
+            p1 = p1.next;
+        }
+    }
+
+    void remove_duplicates() {
+        Node ptr1 = null, ptr2 = null, dup = null;
+        ptr1 = head;
+
+        /* Pick elements one by one */
+        while (ptr1 != null && ptr1.next != null) {
+            ptr2 = ptr1;
+
+            /* Compare the picked element with rest
+                of the elements */
+            while (ptr2.next != null) {
+
+                /* If duplicate then delete it */
+                if (ptr1.data == ptr2.next.data) {
+
+                    /* sequence of steps is important here */
+                    dup = ptr2.next;
+                    ptr2.next = ptr2.next.next;
+                    System.gc();
+                } else /* This is tricky */ {
+                    ptr2 = ptr2.next;
+                }
+            }
+            ptr1 = ptr1.next;
+        }
+    }
+
     /*
      * Adds node at the end of the current list
+     *  begining ->10 ->20->null end
      */
     public void addNode(int d) {
         Node n = new Node(d);
@@ -59,13 +120,13 @@ class LinkedListImpl {
         Node end = new Node(d);
         if (head == null) {
             head = end;
-        } else {
-            Node n = head;
-            while (n.next != null) {
-                n = n.next;
-            }
-            n.next = end;
+            return;
         }
+        Node n = head;
+        while (n.next != null) {
+            n = n.next;
+        }
+        n.next = end;
     }
 
     /*
@@ -97,14 +158,14 @@ class LinkedListImpl {
         Node n = head;
         if (n.data == d) {
             head = head.next; // carefull head.next = head is totally wrong
-        } else {
-            while (n.next != null) {
-                if (n.next.data == d) {
-                    n.next = n.next.next;
-                } else {
-                    n = n.next;
-                }
+            return;
+        }
+        while (n.next != null) {
+            if (n.next.data == d) {
+                n.next = n.next.next; // skip the node
+                return;
             }
+            n = n.next;
         }
     }
 
