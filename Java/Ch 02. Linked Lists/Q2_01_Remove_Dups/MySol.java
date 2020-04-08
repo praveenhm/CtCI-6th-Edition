@@ -1,5 +1,7 @@
 package Q2_01_Remove_Dups;
 
+import java.util.HashSet;
+
 /**
  * Linked list implementations
  */
@@ -11,11 +13,12 @@ public class MySol {
         listImpl.addNode2(10);
         listImpl.addNode2(20);
         listImpl.addNode2(30);
+        listImpl.addNode2(10);
         listImpl.addNode2(20);
-        listImpl.addNode2(30);
         listImpl.addNode2(40);
+        listImpl.printLinkedList();
 
-        listImpl.removeDups();
+        listImpl.removeDupsBuffer();
         //listImpl.deleteNode(20);
 //        listImpl.deleteNode(20);
 
@@ -48,11 +51,10 @@ class LinkedListImpl {
         }
     }
 
-
-    /* remove duplicates
+    /* remove duplicates without buffer
        page 94, problem 2.1
        use two pointers p1 and p2
-       keep one pointe and iterate rest
+       keep one pointer and iterate rest of the loop
      */
     public void removeDups() {
         Node p1 = null, p2 = null;
@@ -69,6 +71,30 @@ class LinkedListImpl {
             p1 = p1.next;
         }
     }
+
+    /*
+    Remove dups with buffer
+    This is tricky one, after deleting the pointer should not advance
+    10->20->30->10->20->40 // after skipping 10,now 20 is the next node
+    10->20->30->X->20->40  // don't advance the pointer, since 20 needs to checked
+     */
+
+    public void removeDupsBuffer() {
+        Node p1 = null;
+        if (head == null) return;
+        p1 = head;
+        HashSet<Integer> hs = new HashSet<>();
+        hs.add(p1.data);
+        while (p1 != null && p1.next != null) {
+            if (hs.contains(p1.next.data)) {
+                p1.next = p1.next.next;
+            } else {
+                hs.add(p1.next.data);
+                p1 = p1.next; // tricky: this should be inside else
+            }
+        }
+    }
+
 
     void remove_duplicates() {
         Node ptr1 = null, ptr2 = null, dup = null;
