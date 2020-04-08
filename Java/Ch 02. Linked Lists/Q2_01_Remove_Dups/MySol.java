@@ -20,13 +20,12 @@ public class MySol {
         listImpl.removeNodeAtCertainIndex(3);
         listImpl.printLinkedList();
     }
-
 }
 
 class LinkedListImpl {
     Node head = null, tail = null;
 
-    class Node {
+    static class Node {
         int data;
         Node next;
 
@@ -35,14 +34,15 @@ class LinkedListImpl {
         }
     }
 
+
     /*
      * Adds node at the end of the current list
      */
     public void addNode(int data) {
         if (head == null) {
-            Node temp = new Node(data);
-            head = temp;
-            tail = temp;
+            Node tmp = new Node(data);
+            head = tmp;
+            tail = tmp;
         } else {
             tail.next = new Node(data);
             tail = tail.next;
@@ -50,28 +50,41 @@ class LinkedListImpl {
     }
 
     /*
+     * Just using head, no tail
+     * append to tail
+     */
+    public void addNode2(int data) {
+        Node tail = new Node(data);
+        Node tmp = head;
+        while (tmp.next != null) {
+            tmp = tmp.next;
+        }
+        tmp.next = tail;
+    }
+
+    /*
      * Adds node at the certain index.
      */
     public void addNodeAtCertainIndex(int data, int index) {
-        Node temp = head;
+        Node tmp = head;
         int count = 0;
-        while (temp != null && ++count != index)
-            temp = temp.next;
+        while (tmp != null && ++count != index)
+            tmp = tmp.next;
         Node node = new Node(data);
-        node.next = temp.next;
-        temp.next = node;
+        node.next = tmp.next;
+        tmp.next = node;
     }
 
     /*
      * Removes the last node in the given list and updates tail node
      */
     public void removeNode() {
-        Node temp = head;
-        while (temp.next != null && temp.next.next != null) {
-            temp = temp.next;
+        Node tmp = head;
+        while (tmp.next != null && tmp.next.next != null) {
+            tmp = tmp.next;
         }
-        temp.next = null;
-        tail = temp;
+        tmp.next = null;
+        tail = tmp;
     }
 
     /*
@@ -88,12 +101,12 @@ class LinkedListImpl {
      *
      */
     public void removeNodeAtCertainIndex(int index) {
-        Node temp = head;
+        Node tmp = head;
         int count = 0;
-        while (temp != null && ++count != index)
-            temp = temp.next;
-        temp.data = temp.next.data;
-        temp.next = temp.next.next;
+        while (tmp != null && ++count != index)
+            tmp = tmp.next;
+        tmp.data = tmp.next.data;
+        tmp.next = tmp.next.next;
     }
 
     /*
@@ -101,9 +114,9 @@ class LinkedListImpl {
      * Alternatively you can return the index too.
      */
     public boolean search(int target) {
-        Node temp = head;
-        while (temp != null) {
-            if (temp.data == target)
+        Node tmp = head;
+        while (tmp != null) {
+            if (tmp.data == target)
                 return true;
         }
         return false;
@@ -114,11 +127,11 @@ class LinkedListImpl {
      * Checks if a node with the given dataue exist in the list, returns the index of the given dataue in the list.
      */
     public int searchAndReturnIndex(int target) {
-        Node temp = head;
+        Node tmp = head;
         int count = 0;
-        while (temp != null) {
+        while (tmp != null) {
             count++;
-            if (temp.data == target) return count;
+            if (tmp.data == target) return count;
         }
         return -1;
     }
@@ -129,10 +142,10 @@ class LinkedListImpl {
 
     public void printLinkedList() {
         System.out.println();
-        Node temp = head;
-        while (temp != null) {
-            System.out.print(" " + temp.data);
-            temp = temp.next;
+        Node tmp = head;
+        while (tmp != null) {
+            System.out.print(" " + tmp.data);
+            tmp = tmp.next;
         }
     }
 
