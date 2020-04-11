@@ -18,7 +18,8 @@ public class MySol {
         listImpl.addNode2(40);
         listImpl.printLinkedList();
 
-        listImpl.removeDupsBuffer();
+        //listImpl.removeDupsBuffer();
+        listImpl.removeDups();
         //listImpl.deleteNode(20);
 //        listImpl.deleteNode(20);
 
@@ -57,28 +58,27 @@ class LinkedListImpl {
        keep one pointer and iterate rest of the loop
      */
     public void removeDups() {
-        Node p1 = null, p2 = null;
-        p1 = head;
-        while (p1 != null && p1.next != null) {
-            p2 = p1;
-            while (p2.next != null) {
-                if (p1.data == p2.next.data) {
-                    p2.next = p2.next.next;   // skip the duplicate/remove
+        Node current = null, runner = null;
+        current = head;
+        while (current != null && current.next != null) {
+            runner = current;
+            while (runner.next != null) {
+                if (current.data == runner.next.data) {
+                    runner.next = runner.next.next;   // skip the duplicate/remove
                 } else {
-                    p2 = p2.next;
+                    runner = runner.next;
                 }
             }
-            p1 = p1.next;
+            current = current.next;
         }
     }
 
     /*
-    Remove dups with buffer
+    Remove dups using buffer
     This is tricky one, after deleting the pointer should not advance
     10->20->30->10->20->40 // after skipping 10,now 20 is the next node
     10->20->30->X->20->40  // don't advance the pointer, since 20 needs to checked
      */
-
     public void removeDupsBuffer() {
         Node p1 = null;
         if (head == null) return;
