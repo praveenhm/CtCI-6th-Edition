@@ -41,11 +41,11 @@ public class MySol {
  */
 class LinkedListImpl {
 
-    Node head = null, tail = null;
+    private Node head = null, tail = null;
 
-    static class Node {
-        int data;
-        Node next = null;
+    private static class Node {
+        private int data;
+        private Node next = null;
 
         public Node(int d) {
             this.data = d;
