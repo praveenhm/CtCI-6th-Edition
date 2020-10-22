@@ -37,7 +37,11 @@ public class QuestionA {
 	}	
 	
 	public static void main(String[] args) {
-		String[][] tests = {{"ababb", "backbatbackbatbat"}, {"abab", "backsbatbackbats"}, {"aba", "backsbatbacksbat"}};
+	//	String[][] tests = {{"ababb", "backbatbackbatbat"},	{"abab", "backsbatbackbats"}, {"aba", "backsbatbacksbat"}};
+		String[][] tests = {{"aabb", "xyzabcxzyabc"},	{"abab", "gotogoto"}, 	{"aba", "gotogo"}};
+
+
+
 		for (String[] test : tests) {
 			String pattern = test[0];
 			String value = test[1];

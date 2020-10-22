@@ -7,11 +7,11 @@ public class MyIntroQueue {
     public static void main(String[] args) {
 
         MyQueue2<Integer> myq = new MyQueue2<Integer>();
+        System.out.println(myq.isEmpty());
+        myq.add(10);
+        myq.add(20);
+        myq.add(30);
         try {
-            System.out.println(myq.isEmpty());
-            myq.add(10);
-            myq.add(20);
-            myq.add(30);
             myq.remove();
             System.out.println(myq.peek());
             myq.remove();
@@ -20,14 +20,14 @@ public class MyIntroQueue {
             myq.remove();
             myq.remove();
             myq.remove();
-
-            myq.add(40);
-            myq.add(50);
-        System.out.println(myq.peek());
-
-        }catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println("oops");
         }
+
+        myq.add(40);
+        myq.add(50);
+        System.out.println(myq.peek());
+
     }
 }
 
@@ -66,12 +66,12 @@ class MyQueue2<T> {
         return item;
     }
 
-    public T peek(){
-        if(first == null) throw new NoSuchElementException();
+    public T peek() {
+        if (first == null) throw new NoSuchElementException();
         return first.data;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return first == null;
     }
 }
